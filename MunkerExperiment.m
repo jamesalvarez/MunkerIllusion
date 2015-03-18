@@ -89,6 +89,10 @@ WaitSecs(5);
 ShutDownExperiment();
 end
 
+
+% You can put this in a seperate file, but often when starting I keep
+% things in one file, when I will need to refer to the functions together
+% etc
 function [screen, stimuli] = InitialiseExperiment()
     
     %% Randomisation
