@@ -4,7 +4,7 @@ function [environment, stimuli] = InitialiseExperiment()
     rng('shuffle');
     
     %% Screen
-    backgroundColour = [192 192 192];
+    backgroundColour = Constants.backgroundColour;
     AssertOpenGL;
     
     % Get the screen number for displaying
@@ -47,7 +47,7 @@ function [environment, stimuli] = InitialiseExperiment()
     % Load image:
     % must be monochrome bitmap, plus sign makes array of doubles rather
     % than logicals - 0s and 1s.
-    picture = +imread('heartstimuli.bmp');
+    picture = Constants.picture;
     [height, width] = size(picture);
     stripe_width = 25;
     skip = stripe_width * 2;
@@ -71,16 +71,17 @@ function [environment, stimuli] = InitialiseExperiment()
     rect([2,4]) = rect([2,4]) + screen.centreY - (height / 2);
     leftRect = rect;
     rightRect = rect;
-    leftRect([1,3]) = leftRect([1,3]) + screen.centreX - width - 50;
-    rightRect([1,3]) = rightRect([1,3]) + screen.centreX + 50;
+    dist = Constants.distanceBetweenPics / 2;
+    leftRect([1,3]) = leftRect([1,3]) + screen.centreX - width - dist;
+    rightRect([1,3]) = rightRect([1,3]) + screen.centreX + dist;
     
        
     % Prepare output
     stimuli.imageMatrix = picture;
     stimuli.leftDestinationRect = leftRect;
     stimuli.rightDestinationRect = rightRect;
-    stimuli.stripeColourARGB = [ 255 0 0 ];
-    stimuli.stripeColourBRGB = [ 255 0 255 ];
+    stimuli.stripeColourARGB = Constants.stripeColourARGB;
+    stimuli.stripeColourBRGB = Constants.stripeColourBRGB;
 
     
     %% Keyboard
@@ -88,13 +89,13 @@ function [environment, stimuli] = InitialiseExperiment()
     KbCheck;
     
     % These store codes for each key in a variable
-    keys.keyHueUp = KbName('q');
-    keys.keyHueDown = KbName('a');
-    keys.keySatUp = KbName('w');
-    keys.keySatDown = KbName('s');
-    keys.keyValUp = KbName('e');
-    keys.keyValDown = KbName('d');
-    keys.keyDone = KbName('space');
+    keys.keyHueUp = Constants.keyHueUp;
+    keys.keyHueDown = Constants.keyHueDown;
+    keys.keySatUp = Constants.keySatUp;
+    keys.keySatDown = Constants.keySatDown;
+    keys.keyValUp = Constants.keyValUp;
+    keys.keyValDown = Constants.keyValDown;
+    keys.keyDone = Constants.keyDone;
     
     %A list of keys to check
     keys.keysToCheck = [keys.keyHueUp, keys.keyHueDown, keys.keySatUp,... 

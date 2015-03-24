@@ -1,7 +1,13 @@
 function MunkerExperiment()
 %MUNKEREXPERIMENT Main function, to run the experiment
 %   
-
+    subID = input('Please enter subject ID:','s');
+    results_filename = ['Munker-',subID,'.csv'];
+    
+    if ~isempty(dir(results_filename))
+        disp(['The file ',results_filename,' exists!']);
+        return;
+    end
 
     %% Setting up
     % Setup hardware, loading pictures, setup psychtoolbox etc...
@@ -10,14 +16,7 @@ function MunkerExperiment()
     %% Setting up trial
 
     % The eight starting colours
-    starting_colours_rgb = [ 10, 10, 10;...
-                             20, 50, 60;...
-                             70, 130, 20;...
-                             255, 0, 23;...
-                             89, 100, 0;...
-                             0, 250, 46;...
-                             34, 12, 120;...
-                             60, 0, 200 ];
+    starting_colours_rgb = Constants.startingColoursRGB;
 
     %normalise them for the rgb2hsv function, and convert
     normalised_starting_colours = rgb2hsv(starting_colours_rgb / 255);
@@ -70,14 +69,28 @@ function MunkerExperiment()
         trialInfo.adjustSide = 1; %(1 or 2)
 
         % Show trial and store result
-        results(trial_number,:).colourSelected = ...
-            DoMunkerTrial(trialInfo,stimuliInfo,environment);
+        hsv_result = DoMunkerTrial(trialInfo,stimuliInfo,environment);
+        
+        % Populate results
+        colourChosen = hsv2rgb(hsv_result) * 255;
+        colourShown = hsv2rgb(current_colour) * 255;
+        
+        results.trialNumber(trial_number) = trial_number;
+        results.stripeType(trial_number) = current_trial.stripeType;
+        results.chosenR(trial_number) = colourChosen(1);
+        results.chosenG(trial_number) = colourChosen(2);
+        results.chosenB(trial_number) = colourChosen(3);
+        results.shownR(trial_number) = colourShown(1);
+        results.shownG(trial_number) = colourShown(2);
+        results.shownB(trial_number) = colourShown(3);
         
         % Wait one second
-        WaitSecs(1);
+        WaitSecs(Constants.ISI);
     end
+
+    % Save results                 
+    results2csv(results, results_filename);
     
-    disp (results);
     ShutdownExperiment();
 end
 

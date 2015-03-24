@@ -54,15 +54,15 @@ function [ result ] = DoMunkerTrial( trialInfo, stimuliInfo, environment )
     chosingColour = true;
     
     %how much to adjust HSV parameter on press of a key
-    change_increment_min = 1 / 255; %small adjustments when tapping
-    change_increment_per_sec = 0.5; %larger adjustments when holding
+    change_increment_min = Constants.changeIncrementMin; %small adjustments when tapping
+    change_increment_per_sec = Constants.changeIncrementPerSec; %larger adjustments when holding
     change_increment = 0; %variable to hold current change increment
     
     %variable to store last pressed key and time
     lastKeyPressed = 0;
     lastSecs = GetSecs;
     keyDownSecs = GetSecs;
-    minKeyTime = 0.5; %you have to hold key for half second before it scrolls fast
+    minKeyTime = Constants.minKeyTime; %you have to hold key for half second before it scrolls fast
 
     while (chosingColour)
         % Set the colour from the adjustFigureHSV value
