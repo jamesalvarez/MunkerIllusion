@@ -1,4 +1,4 @@
-function [screen, stimuli] = InitialiseExperiment()
+function [environment, stimuli] = InitialiseExperiment()
     
     %% Randomisation
     rng('shuffle');
@@ -86,7 +86,26 @@ function [screen, stimuli] = InitialiseExperiment()
     %% Keyboard
     KbName('UnifyKeyNames');
     KbCheck;
+    
+    % These store codes for each key in a variable
+    keys.keyHueUp = KbName('q');
+    keys.keyHueDown = KbName('a');
+    keys.keySatUp = KbName('w');
+    keys.keySatDown = KbName('s');
+    keys.keyValUp = KbName('e');
+    keys.keyValDown = KbName('d');
+    keys.keyDone = KbName('space');
+    
+    %A list of keys to check
+    keys.keysToCheck = [keys.keyHueUp, keys.keyHueDown, keys.keySatUp,... 
+                   keys.keySatDown, keys.keyValUp, keys.keyValDown,...
+                   keys.keyDone];
 
+
+    %% Package screen and keys into environment
+    environment.screen = screen;
+    environment.keys = keys;
+    
     %% Timer
     GetSecs;
 end
