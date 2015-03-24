@@ -49,7 +49,7 @@ function [environment, stimuli] = InitialiseExperiment()
     % than logicals - 0s and 1s.
     picture = +imread('heartstimuli.bmp');
     [height, width] = size(picture);
-    stripe_width = 5;
+    stripe_width = 25;
     skip = stripe_width * 2;
     for stripe_location = stripe_width : skip : width
         for vert = 1 : height
@@ -79,8 +79,8 @@ function [environment, stimuli] = InitialiseExperiment()
     stimuli.imageMatrix = picture;
     stimuli.leftDestinationRect = leftRect;
     stimuli.rightDestinationRect = rightRect;
-    stimuli.stripeColourARGB = [ 0 0 0 ];
-    stimuli.stripeColourBRGB = [ 255 255 255 ];
+    stimuli.stripeColourARGB = [ 255 0 0 ];
+    stimuli.stripeColourBRGB = [ 255 0 255 ];
 
     
     %% Keyboard

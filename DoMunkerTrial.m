@@ -55,7 +55,7 @@ function [ result ] = DoMunkerTrial( trialInfo, stimuliInfo, environment )
     
     %how much to adjust HSV parameter on press of a key
     change_increment_min = 1 / 255; %small adjustments when tapping
-    change_increment_per_sec = 10 / 255; %larger adjustments when holding
+    change_increment_per_sec = 0.5; %larger adjustments when holding
     change_increment = 0; %variable to hold current change increment
     
     %variable to store last pressed key and time

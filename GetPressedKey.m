@@ -13,7 +13,7 @@ function [keyPressed, sameKey, secs] = GetPressedKey(keysWanted, lastKeyPressed)
         % get key, if already pressed, then it is same key
         [pressed, secs, kbData] = KbCheck;
         if pressed == 1 
-            if kbData(lastKeyPressed) == 1 
+            if lastKeyPressed ~= 0 && kbData(lastKeyPressed) == 1 
                 % same as previous key, return
                 sameKey = 1;
                 keyPressed = lastKeyPressed;
