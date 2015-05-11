@@ -58,10 +58,10 @@ function MunkerExperiment()
 
         % Decide on the stripe index
         if current_trial.stripeType == 1 
-            trialInfo.adjustStripeIndex = 1;
+            trialInfo.adjustStripeIndex = 3;
             trialInfo.fixedStripeIndex = 2;
         else
-            trialInfo.adjustStripeIndex = 2;
+            trialInfo.adjustStripeIndex = 3;
             trialInfo.fixedStripeIndex = 1;
         end
 

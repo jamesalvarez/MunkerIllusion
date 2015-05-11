@@ -5,7 +5,7 @@ function DrawMunkerStimulus( stimulus, screen )
     %       stripeColourA
     %       stripeColourB
     %       figureColour
-    %       stripeIndex (1 for drawing foreground on A, 2 for B)
+    %       stripeIndex (1 for drawing foreground on A, 2 for B, 3 For Full)
     %       destinationRect (location to draw)
     %       imageMatrix (matrix of indexes 1 to 4)
     %
@@ -40,7 +40,14 @@ function DrawMunkerStimulus( stimulus, screen )
         red(1) = stimulus.figureColour(1);
         green(1) = stimulus.figureColour(2);
         blue(1) = stimulus.figureColour(3);
+    elseif stimulus.stripeIndex == 2
+        red(3) = stimulus.figureColour(1);
+        green(3) = stimulus.figureColour(2);
+        blue(3) = stimulus.figureColour(3);
     else
+        red(1) = stimulus.figureColour(1);
+        green(1) = stimulus.figureColour(2);
+        blue(1) = stimulus.figureColour(3); 
         red(3) = stimulus.figureColour(1);
         green(3) = stimulus.figureColour(2);
         blue(3) = stimulus.figureColour(3);
@@ -48,7 +55,7 @@ function DrawMunkerStimulus( stimulus, screen )
 
     % Step 3: construct the images, by using the imageMatrix as indexes to
     % the individual colour arrays
-    image = red(stimulus.imageMatrix);
+    image(:,:,1) = red(stimulus.imageMatrix);
     image(:,:,2) = green(stimulus.imageMatrix);
     image(:,:,3) = blue(stimulus.imageMatrix);
 
